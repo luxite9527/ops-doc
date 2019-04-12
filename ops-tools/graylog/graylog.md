@@ -113,7 +113,7 @@ docker-compose restart
 服务起来以后，就需要创建`Input`,`Input`是输入源的类型定义。一般常用的有以下:
 
 登入系统，进入"System/Inputs",创建`Input`类型:
-![创建Input](images/graylog-input.jpg)
+![创建Input](../images/graylog-input.jpg)
 
 - GELF 这是官方推荐的一种日志格式，这种输入类型一般我们应用在应用程序里面，应用程序在打印日志的时候，将日志格式设置为GELF格式，并通过UDP发送过来。
 - Rsyslog UDP 一般用于配合Linux的Rsyslog，将操作系统的日志收集过来

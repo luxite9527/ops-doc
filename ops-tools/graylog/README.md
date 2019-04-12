@@ -80,7 +80,7 @@ services:
       # Syslog TCP
       - 514:514/udp
       # Syslog Raw
-      - 1514:1514/udp
+      - 5555:5555/udp
       # GELF UDP
       - 12201:12201/udp
 ```
