@@ -1,0 +1,1 @@
+# Graylog配合Rsyslog收集Linux操作系统日志
