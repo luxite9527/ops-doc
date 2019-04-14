@@ -5,13 +5,14 @@
 * [基础服务](baseservices/README.md)
   
   * [DNS](baseservices/named.md)
+  * NGINX
+    * [NGINX常用内置变量](nginx-variables.md)
 
 * [数据库](database/README.md)
   
   * [MySQL Debug](databases/mysql_status.md)
 
 * [生态工具](ops-tools/README.md)
-  
   * [GitLab CI/CD](ops-tools/gitlab-ci.md)
   * GrayLog日志收集
     * [介绍](ops-tools/graylog/README.md)
