@@ -6,7 +6,8 @@
   
   * [DNS](baseservices/named.md)
   * NGINX
-    * [NGINX常用内置变量](nginx-variables.md)
+    * [NGINX常用内置变量](baseservices/nginx-variables.md)
+    * [NGINX配置文件解读](baseservices/nginx-conf.md)
 
 * [数据库](database/README.md)
   
