@@ -42,11 +42,13 @@ services:
       - http.host=0.0.0.0
       - transport.host=0.0.0.0
       - network.host=0.0.0.0
+      # -Xms与-Xmx值要一样
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ulimits:
       memlock:
         soft: -1
         hard: -1
+    # 内存限制相应调整
     mem_limit: 1g
   # Graylog: https://hub.docker.com/r/graylog/graylog/
   graylog:
@@ -88,6 +90,8 @@ services:
 因为docker-compose的原因，新生成的卷权限为root，还需要做点特殊处理
 
 ```bash
+# 内核参数调整，不然ES启动不起来
+sysctl -w vm.max_map_count = 262144
 # 先启动服务
 docker-compose up -d
 # 启动服务，会在当前目录会创建卷目录,给mongo卷给予权限
