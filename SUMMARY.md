@@ -24,3 +24,4 @@
     * [介绍](ops-tools/ceph/README.md)
     * [简单调试](ops-tools/ceph/ceph-debug.md)
     * [实践-K8S基于Rook部署Ceph](ops-tools/ceph/k8s-install-ceph.md)
+* [常用开发网址](domain/README.md)
