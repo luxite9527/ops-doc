@@ -19,3 +19,5 @@ pip install -i URL PackageName
 - IP查询: https://ifconfig.co/
 
 - ISO下载: http://msdn.itellyou.cn/
+  
+- 行业新星: https://www.itjuzi.com/

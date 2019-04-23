@@ -57,17 +57,21 @@ services:
     container_name: graylog-server
     environment:
       # echo -n "admin" | sha256sum
+      - TZ=Asia/Shanghai
       - GRAYLOG_ROOT_PASSWORD_SHA2=8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
       # IP设置成宿主机IP
       - GRAYLOG_HTTP_EXTERNAL_URI=http://128.0.255.104:9000/
       - GRAYLOG_TRANSPORT_EMAIL_ENABLED=true
       - GRAYLOG_TRANSPORT_EMAIL_HOSTNAME=smtp.qq.com
       - GRAYLOG_TRANSPORT_EMAIL_PORT=25
-      - GRAYLOG_TRANSPORT_EMAIL_USE_AUTH=false
+      - GRAYLOG_TRANSPORT_EMAIL_USE_AUTH=true
       - GRAYLOG_TRANSPORT_EMAIL_USE_TLS=false
       # 用以邮件告警，填写真实相关信息
       - GRAYLOG_TRANSPORT_EMAIL_AUTH_USERNAME=username
       - GRAYLOG_TRANSPORT_EMAIL_AUTH_PASSWORD=password
+      - GRAYLOG_TRANSPORT_EMAIL_FROM_EMAIL=burtte@sina.com
+      - GRAYLOG_TRANSPORT_EMAIL_SUBJECT_PREFIX=GraylogAlert
+      - GRAYLOG_TRANSPORT_EMAIL_WEB_INTERFACE_URL=http://128.0.255.10:9000/
       - GRAYLOG_ROOT_TIMEZONE=Asia/Shanghai
       - "JAVA_OPTS=-Xms512m -Xmx512m"
     links:
@@ -94,8 +98,8 @@ services:
 sysctl -w vm.max_map_count = 262144
 # 先启动服务
 docker-compose up -d
-# 启动服务，会在当前目录会创建卷目录,给mongo卷给予权限
-chown 777 -R mongo_data
+# 启动服务，会在当前目录会创建卷目录,给Elasticsearch卷给予权限
+chown 777 -R elas_data
 # 再重新启动服务就会正常了
 docker-compose restart
 ```
