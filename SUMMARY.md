@@ -14,6 +14,10 @@
   * [MySQL Debug](databases/mysql_status.md)
 
 * [生态工具](ops-tools/README.md)
+  * Zabbix监控模板
+    * [Reids](https://github.com/oscm/zabbix/tree/master/redis)
+    * [MongoDB](https://github.com/omni-lchen/zabbix-mongodb) 不支持4.0
+    * [RabbitMQ](https://github.com/jasonmcintosh/rabbitmq-zabbix)
   * [GitLab CI/CD](ops-tools/gitlab-ci.md)
   * GrayLog日志收集
     * [介绍](ops-tools/graylog/README.md)
