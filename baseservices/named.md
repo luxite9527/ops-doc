@@ -60,6 +60,7 @@ dnssec-validation no;
 Zone "unknowname.test" {
     type master;
     file "unknowname.test.named";
+    also-notify {192.168.0.6; };
     ; 允许的备DNS同步文件
     allow-transfer  { 192.168.0.6; };
 };
