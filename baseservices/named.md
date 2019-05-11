@@ -88,7 +88,7 @@ $TTL    288600
 @                  IN            NS              dns1.unknowname.test.
 @                  IN            NS              dns2.unnknowname.test.
 ; DNS的A记录一定要是运行named的主机
-dns1               IN            A               192.168.0.5 
+dns1               IN            A               192.168.0.5
 svn                IN            A               192.168.0.254
 
 # 保存后，将named文件所有者设置为named:named
@@ -120,7 +120,7 @@ dnssec-enable no;
 dnssec-validation no;
 
 # 定义Zone
-Zone "unknowname.test" { 
+Zone "unknowname.test" {
     type slave;
     file "slaves/unknowname.test.named";
     masterfile-format text;
