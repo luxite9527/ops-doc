@@ -10,7 +10,6 @@
     * [NGINX配置文件解读](baseservices/nginx-conf.md)
 
 * [数据库](database/README.md)
-  
   * [MySQL Debug](databases/mysql_status.md)
 
 * [生态工具](ops-tools/README.md)
@@ -30,4 +29,6 @@
     * [实践-K8S基于Rook部署Ceph](ops-tools/ceph/k8s-install-ceph.md)
   * Elasticsearch全文检索
     * [Elasticsearch常用API](ops-tools/es-api.md)
-* [常用开发网址](domain/README.md)
+* [Linux开发]
+  * [VIM技巧](dev/vim.md)
+  * [常用开发网址](dev/README.md)

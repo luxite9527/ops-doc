@@ -1,9 +1,12 @@
 # NGINX配置文件解释
 
 ```conf
-#user  nobody; 以哪个用户运行
-worker_processes  auto;        # 让Nginx自动根据CPU核心计算出
-worker_rlimit_nofile 65535;    # 单个进程允许打开的文件数
+# 以哪个用户运行
+user  nobody;
+# 让Nginx自动根据CPU核心计算出
+worker_processes  auto;
+# 单个进程允许打开的文件数
+worker_rlimit_nofile 65535;
 
 #error_log  logs/error.log;
 #error_log  logs/error.log  notice;
@@ -46,10 +49,10 @@ http {
                     '$status $body_bytes_sent "$http_referer" '
                      '"$http_user_agent" "$http_x_forwarded_for"';
 
-   log_format  access  "$time_local  $request  $status  $remote_addr  $upstream_response_time $upstream_addr";
+    log_format  access  "$time_local  $request  $status  $remote_addr  $upstream_response_time $upstream_addr";
 
-   #访问日志      日志路径                              套用的日志格式
-   # 缓冲1kb的日志，后续一起写入磁盘
+    # 访问日志      日志路径     套用的日志格式
+    # 缓冲1kb的日志，后续一起写入磁盘
     access_log   /var/log/nginx/access.log    main  buffer=1k;
 
     sendfile        on;
@@ -167,7 +170,7 @@ http {
         proxy_cache_valid 200 302 1h;
         # 缓存的数据，每一个小时重新从服务器上取一次
         proxy_cache_key $host$uri$is_args$args;
-        proxy_ignore_headers "Cache-Control" "Expires" "Set-Cookie"; 
+        proxy_ignore_headers "Cache-Control" "Expires" "Set-Cookie";
         proxy_pass http://testweb;
 
       }
