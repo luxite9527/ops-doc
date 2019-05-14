@@ -104,6 +104,28 @@ chown 777 -R elas_data
 docker-compose restart
 ```
 
+## Nginx代理内部Graylog
+
+```conf
+server {
+    listen       8022;
+    server_name  log-prod.unknowname.win;
+
+    #charset koi8-r;
+    access_log  /var/log/nginx/log.access.log  main;
+
+    location / {
+      allow 218.17.160.241;
+      deny all;
+      proxy_http_version 1.1;
+      proxy_set_header Host 172.18.171.110;
+      proxy_set_header X-Graylog-Server-URL http://log-prod.unknowname.win:8022/;
+      proxy_pass_request_headers on;
+      proxy_pass http://172.18.171.110:9000;
+    }
+}
+```
+
 ## 官方优化建议
 
   1. graylog-server节点，焦点是CPU，因为它是CPU密集型。所以CPU尽量要够强
