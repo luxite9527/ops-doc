@@ -12,4 +12,9 @@ index.number_of_shards: 5
 indices.fielddata.cache.size： 60%
 # 索引的刷新频率，默认1秒，太小会造成索引频繁刷新，新的数据写入就慢了。（此参数的设置需要在写入性能和实时搜索中取平衡）通常在ELK场景中需要将值调大一些比如60s，在有_template的情况下，需要设置在应用的_template中才生效。
 index.refresh_interval: 10s
+# 服务监听地址，默认为127.0.0.1
+network.host：172.16.1.1
+# 一启动就占用分配的内存，防止使用SWAP分区
+# ES_HEAP_SIZE 这个JAVA_OPTS官方建设设置为物理内存的一半
+bootstrap.memory_lock: true
 ```
