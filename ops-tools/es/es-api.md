@@ -10,6 +10,10 @@
   
         curl -XDELETE http://es:9200/IndexName
 
+- 索引配置信息
+  
+        curl -XGET http://es:9200/IndexName/_settings?pretty
+
 ## 集群API
 
 - 修改默认密码
