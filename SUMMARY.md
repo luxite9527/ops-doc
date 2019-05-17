@@ -28,7 +28,8 @@
     * [简单调试](ops-tools/ceph/ceph-debug.md)
     * [实践-K8S基于Rook部署Ceph](ops-tools/ceph/k8s-install-ceph.md)
   * Elasticsearch全文检索
-    * [Elasticsearch常用API](ops-tools/es-api.md)
+    * [Elasticsearch重新配置项](ops-tools/es/es-conf.md) 
+    * [Elasticsearch常用API](ops-tools/es/es-api.md)
 * [Linux开发]
   * [VIM技巧](dev/vim.md)
   * [常用开发网址](dev/README.md)
