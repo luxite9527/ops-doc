@@ -159,6 +159,10 @@ http {
         }
 
         location / {
+            # 请求方法为HEAD，关闭访问日志
+            if ($request_method = "HEAD") {
+              access_log off;
+            }
             proxy_pass http://vargo;
         }
 
