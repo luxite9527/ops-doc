@@ -53,7 +53,9 @@ http {
 
     # 访问日志      日志路径     套用的日志格式
     # 缓冲1kb的日志，后续一起写入磁盘
-    access_log   /var/log/nginx/access.log    main  buffer=1k;
+    access_log   /var/log/nginx/access.log   main  buffer=1k;
+    # 同时支持写入远端rsyslog
+    # access_log syslog:server=128.0.255.10:1514 json;
 
     sendfile        on;
     tcp_nopush     on;
@@ -146,7 +148,7 @@ http {
             limit_rate 200k;
 
             # 修改请求主机名，防止后端真实服务器根据Hostname进行分流。将Host值设置为$http_host的值。可以看成Host=$http_host
-            proxy_set_header Host $http_host;
+            proxy_set_header Host $host;
             # 客户端一层代理下，这是真实IP
             proxy_set_header X-Real-IP $remote_addr;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
