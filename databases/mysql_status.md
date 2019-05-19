@@ -53,3 +53,13 @@
  WHERE TABLE_SCHEMA='DBName'
  ORDER BY DATA_LENGTH+INDEX_LENGTH desc;
 ```
+
+- 查看用户授权情况
+
+```sql
+SHOW GRANTS for UserName
+# 全局授权
+SELECT * FROM mysql.user where User=Username\G
+# DB授权
+SELECT * FROM mysql.db where User=Username\G
+```
