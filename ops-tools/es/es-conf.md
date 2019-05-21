@@ -1,5 +1,7 @@
 # Elasticsearch 重要的配置项
 
+## elasticsearch.yml
+
 ```yml
 # 默认数据副本数
 index.number_of_replicas: 1
@@ -18,3 +20,14 @@ network.host：172.16.1.1
 # ES_HEAP_SIZE 这个JAVA_OPTS官方建设设置为物理内存的一半
 bootstrap.memory_lock: true
 ```
+
+## 内存配置
+
+ 默认`Eelasticsearch`分配内存时只使用1G，显然不切合实际。而要修改内存的分配值时，并不能通过配置文件方式修改，只能是通过`JVM`参数以环境变量的方式引入
+
+```bash
+export ES_HEAP_SIZE=4g
+./elasticsearch
+```
+
+如果是单台机器完全跑`Elasticsearch`，官方建议是机器的一半内存。但最大不能超过`32G`的内存。
