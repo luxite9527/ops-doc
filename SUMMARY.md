@@ -35,4 +35,4 @@
 * [Linux开发]
   * [VIM技巧](dev/vim.md)
   * [常用开发网址](dev/README.md)
-  * [Chrome信息自签名证书](dev/chrome.md)
+  * [Chrome允许自签名证书](dev/chrome.md)
