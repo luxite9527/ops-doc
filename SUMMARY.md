@@ -33,6 +33,7 @@
   * Elasticsearch全文检索
     * [Elasticsearch重要配置项](ops-tools/es/es-conf.md)
     * [Elasticsearch常用API](ops-tools/es/es-api.md)
+    * [Elasticsearch正常关闭/维护](ops-tools/es/es-stop.md)
 * [Linux开发]
   * [VIM技巧](dev/vim.md)
   * [常用开发网址](dev/README.md)
