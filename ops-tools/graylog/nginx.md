@@ -12,14 +12,11 @@
 http {
     ...
     log_format json  '{"timestamp": "$time_iso8601", '
-                     '"version": "1.1",'
-                     '"source": "nginx",'
-                     '"level": "6",'
                      '"remote_addr": "$remote_addr", '
                      '"body_bytes_sent": $body_bytes_sent, '
                      '"request_time": $request_time, '
                      '"response_status": $status, '
-                     '"request": "$request", '
+                     '"request": "$uri", '
                      '"request_time": "$request_time",'
                      '"request_method": "$request_method", '
                      '"host": "$host",'

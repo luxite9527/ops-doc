@@ -15,7 +15,7 @@
 
 * [生态工具](ops-tools/README.md)
   * Zabbix监控模板
-    * [MSSQLServer](https://github.com/MantasTumenas/Zabbix-template-for-Microsoft-SQL-Server) 
+    * [MSSQLServer](https://github.com/MantasTumenas/Zabbix-template-for-Microsoft-SQL-Server)
     * [Reids](https://github.com/oscm/zabbix/tree/master/redis)
     * [MongoDB](https://github.com/omni-lchen/zabbix-mongodb) 不支持4.0
     * [RabbitMQ](https://github.com/jasonmcintosh/rabbitmq-zabbix)
