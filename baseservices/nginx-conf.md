@@ -112,10 +112,10 @@ http {
       # proxy_set_header Connection  "";
       keepalive 10;
       # 如果失败次数达到max_fails，那么在接下来的时间内认为服务不可用，默认为10s
-      server 10.1.10.17:80  max_fails=3 fail_timeout=6s;
-      server 192.168.0.7:80  weight=4  max_fails=3  fail_timeout=60s;
+      server 10.1.10.17:80   max_fails=3 fail_timeout=6s;
+      server 192.168.0.7:80  weight=4    max_fails=3  fail_timeout=60s;
       # 指定该主机为备份服务器，当前面两台服务都不可用时启用
-       server 192.168.0.8:80 backup;
+      server 192.168.0.8:80 backup;
     }
 
     server {
@@ -135,6 +135,10 @@ http {
         location  / {
             # 请求方法为HEAD，关闭访问日志
             if ($request_method = "HEAD") {
+              access_log off;
+            }
+            # css/js/ico/png结尾的静态文件不记录日志
+            if ($uri ~ "\.(css|js|ico|png)$") {
               access_log off;
             }
             # 缓存有效期，这个数值其实就是告诉终端用户浏览器的失效时间。更改后要重启生效
