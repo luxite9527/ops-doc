@@ -21,3 +21,4 @@ pip install -i URL PackageName
 - ISO下载: http://msdn.itellyou.cn/
 - WinPE工具: http://www.wepe.com.cn/
 - 行业新星: https://www.itjuzi.com/
+- AnsiblePlayBook： https://galaxy.ansible.com/
