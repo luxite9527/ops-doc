@@ -32,22 +32,19 @@ http {
             "~^(?P<realip>((\d{1,3}\.){3}\d{1,3}))"   $realip; #正则表达式
       }
 
-    #定义限制单个IP访问速率。每个IP访问每个URL的频率限制为5次
-    #limit_req_zone   $binary_remote_addr zone=rate_zone:5m rate=15r/s;
-    limit_req_zone    $ClientRealIp$uri  zone=rate_zone:5m rate=5r/s;
-
-   #limit_req在使用时，如果要非常准确的限制请求频率。一定要在"/"目录下使用。很难验证其真实效果
-   limit_conn_zone  $binary_remote_addr zone=binfa:10m;
-
-    #limit_req_zone与limit_conn_zone配合使用才能发挥作用？
+    # 定义限制单个IP访问速率。每个IP访问每个URL的频率限制为5次
+    # limit_req在使用时，如果要非常准确的限制请求频率。一定要在"/"目录下使用。很难验证其真实效果
+    limit_req_zone   $binary_remote_add$uri  zone=rate_zone:5m rate=5r/s;
+    # 每个IP的并发限制，限制每个IP最多多少连接数
+    limit_conn_zone  $binary_remote_addr zone=binfa:10m;
 
     # 开启404错误路转
     fastcgi_intercept_errors on;
   
     # 定义日志格式
     log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
-                    '$status $body_bytes_sent "$http_referer" '
-                     '"$http_user_agent" "$http_x_forwarded_for"';
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
 
     log_format  access  "$time_local  $request  $status  $remote_addr  $upstream_response_time $upstream_addr";
 
@@ -135,7 +132,11 @@ http {
         proxy_read_timeout 60s;
 
         # 普通locations，千万记住根不要用正则的location，不然后续的location将匹配不到
-        location =  / {
+        location  / {
+            # 请求方法为HEAD，关闭访问日志
+            if ($request_method = "HEAD") {
+              access_log off;
+            }
             # 缓存有效期，这个数值其实就是告诉终端用户浏览器的失效时间。更改后要重启生效
             expires 1d;
             # 最大同时请求rate_zone定义的+burst值（15+25）。多了就会返回503。如果请求超时就404
@@ -158,14 +159,6 @@ http {
             proxy_pass http://vargo;
             # 自动故障转移，当主机组中的服务器代理时出现以下情况，自动转移到另一台上面
             proxy_next_upstream http_500 http_502 http_503 error timeout invalid_header;
-        }
-
-        location / {
-            # 请求方法为HEAD，关闭访问日志
-            if ($request_method = "HEAD") {
-              access_log off;
-            }
-            proxy_pass http://vargo;
         }
 
        # 正则locations
