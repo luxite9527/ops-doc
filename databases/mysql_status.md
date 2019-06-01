@@ -40,6 +40,11 @@
 - 查看表索引
 
         show index from TableName;
+        注意：
+        Cardinality：表示索引中不重复行的预估值。如果值非常接近1，应该考虑删除该索引
+        sub_part:NULL 表示对整个列索引
+        packed:关键字如何被压缩，无压缩则为NULL
+        Null:是否索引的列含用NULL值
 
 - 性能监测
 
