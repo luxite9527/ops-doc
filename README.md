@@ -9,6 +9,7 @@
   * NGINX
     * [NGINX常用内置变量](baseservices/nginx-variables.md)
     * [NGINX配置文件解读](baseservices/nginx-conf.md)
+    * [NGINX FAQ](baseservices/nginx-faq.md)
 
 * [数据库](database/README.md)
   * [MySQL Debug](databases/mysql_status.md)
