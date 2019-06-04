@@ -12,6 +12,7 @@
 pip install -i URL PackageName
 ```
 
+- https://mirrors.aliyun.com/pypi/simple/
 - https://pypi.douban.com/simple
 
 ## 其他杂项
