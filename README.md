@@ -42,4 +42,5 @@
   * [Chrome允许自签名证书](dev/chrome.md)
 * [Kubernetes]
   * [RBAC](k8s/k8s-rbac.md)
+  * [CoreDNS配置示例](k8s/coredns.md)
   
