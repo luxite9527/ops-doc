@@ -1,6 +1,8 @@
 # 目录
 
 * [前言](README.md)
+* [Linux知识](linux/README.md)
+  * [Shell技巧](linux/shell.md)
   
 * [基础服务](baseservices/README.md)
   
