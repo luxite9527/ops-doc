@@ -15,6 +15,7 @@
 
 * [数据库](database/README.md)
   * [MySQL Debug](databases/mysql_status.md)
+  * [SQLServer系统函数](databases/mssql_sp.md)
 
 * [生态工具](ops-tools/README.md)
   * Zabbix监控模板
