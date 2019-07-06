@@ -62,22 +62,35 @@
 
 - 查看数据库各表占用空间情况
 
-```sql
- SELECT TABLE_NAME,
- DATA_LENGTH+INDEX_LENGTH,
- TABLE_ROWS,
- concat(round((DATA_LENGTH+INDEX_LENGTH)/1024/1024,2), 'MB') as data
- FROM information_schema.tables
- WHERE TABLE_SCHEMA='DBName'
- ORDER BY DATA_LENGTH+INDEX_LENGTH desc;
-```
+        SELECT TABLE_NAME,
+        DATA_LENGTH+INDEX_LENGTH,
+        TABLE_ROWS,
+        concat(round((DATA_LENGTH+INDEX_LENGTH)/1024/1024,2), 'MB') as data
+        FROM information_schema.tables
+        WHERE TABLE_SCHEMA='DBName'
+        ORDER BY DATA_LENGTH+INDEX_LENGTH desc;
 
 - 查看用户授权情况
 
-```sql
-SHOW GRANTS for UserName
-# 全局授权
-SELECT * FROM mysql.user where User=Username\G
-# DB授权
-SELECT * FROM mysql.db where User=Username\G
-```
+        SHOW GRANTS for UserName
+        # 全局授权
+        SELECT * FROM mysql.user where User=Username\G
+        # DB授权
+        SELECT * FROM mysql.db where User=Username\G
+
+- 查看innodb_buffer_pool_size是否过小
+
+        SHOW STATUS LIKE "%innodb_buffer_pool_read%";
+        # innodb_buffer_pool_reads：表示InnoDB缓冲池无法满足的请求数。需要从磁盘中读取
+        # innodb_buffer_pool_read_requests：表示从内存中读取逻辑的请求数。
+        # reads / read_requests 比值越小越好，说明大部分都是从缓存中读取
+
+- 查看innodb_buffer_pool_size是否过大
+  
+        # 在mysql>命令提示符下执行
+        SHOW ENGINE innodb STATUS\G
+        # Free buffers :表示有多少空闲buffer。如果此值长时间都较高,则可以减小
+
+- 动态修改参数
+
+        SET GLOBAL innodb_buffer_pool_size=268435456 # 256M
