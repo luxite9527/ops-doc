@@ -15,6 +15,7 @@
 
 * [数据库](database/README.md)
   * [MySQL Debug](databases/mysql_status.md)
+  * [MySQL备份恢复](databases/mysql_xtrabackup.md)
   * [SQLServer系统函数](databases/mssql_sp.md)
 
 * [生态工具](ops-tools/README.md)
@@ -39,11 +40,11 @@
     * [Elasticsearch重要配置项](ops-tools/es/es-conf.md)
     * [Elasticsearch常用API](ops-tools/es/es-api.md)
     * [Elasticsearch正常关闭/维护](ops-tools/es/es-stop.md)
-* [Linux开发]
+* Linux开发
   * [VIM技巧](dev/vim.md)
   * [常用开发网址](dev/README.md)
   * [Chrome允许自签名证书](dev/chrome.md)
-* [Kubernetes]
+* Kubernetes
   * [RBAC](k8s/k8s-rbac.md)
   * [CoreDNS配置示例](k8s/coredns.md)
   
