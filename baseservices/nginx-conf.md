@@ -96,9 +96,10 @@ http {
     # 如果遇到后端服务器的40X系列错误，Nginx拦截，也就是说404不由应用程序报，而由Nginx报404。
     proxy_intercept_errors  on;
     # inactive=1d 表示这个zone中的缓存文件如果在1天内都没有被访问，那么文件会被cache manager进程删除掉
-    # max_size=10g 表示这个zone的硬盘容量为10GB
+    # keys_zone 从共享内存中分配一块50MB的内存
+    # max_size=500m, 目录/home/nginx_cache最大使用空间
     # proxy_cache_path的路径需要写入权限
-    proxy_cache_path /home/nginx_cache levels=1:2 keys_zone=nginx_cache:50m inactive=1d max_size=10g;
+    proxy_cache_path /home/nginx_cache  levels=1:2  keys_zone=nginx_cache:50m inactive=1d max_size=500m;
 
     proxy_http_version 1.1;
     proxy_set_header Connection "";
@@ -175,7 +176,6 @@ http {
         proxy_cache_key $host$uri$is_args$args;
         proxy_ignore_headers "Cache-Control" "Expires" "Set-Cookie";
         proxy_pass http://testweb;
-
       }
 
         # 定义404页面自动跳转回首页。真实使用时，使用一个提示找不到页面后再跳转
