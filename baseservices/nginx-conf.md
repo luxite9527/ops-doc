@@ -25,11 +25,14 @@ http {
     include       mime.types;
     default_type  application/octet-stream;
     # map 用于自己定义变量
-    # 取出最真实的用户IP。以备下面做频率限制或者其他用途
+    # 定义一个名称为ClientRealIp的变量。将http_x_forwarded_for变量的值按以下规则赋值:，
+    # 1. 按正则匹配$http_x_forwarded_for里面的值
+    # 2. 如果正则没有匹配，使用default的值。
     map  $http_x_forwarded_for  $ClientRealIp {
-            # 默认变量
+            # 正则没匹配到的话，则取$remote_addr的变量
             default $remote_addr;
-            "~^(?P<realip>((\d{1,3}\.){3}\d{1,3}))"   $realip; #正则表达式
+            # 正则表达式，将分组realip捕获到的值设置为 $realip，并最终赋给$ClientRealIp
+            "~^(?P<realip>((\d{1,3}\.){3}\d{1,3}))"   $realip;
       }
 
     # 定义限制单个IP访问速率。每个IP访问每个URL的频率限制为5次
@@ -46,7 +49,7 @@ http {
                       '$status $body_bytes_sent "$http_referer" '
                       '"$http_user_agent" "$http_x_forwarded_for"';
 
-    log_format  access  "$time_local  $request  $status  $remote_addr  $upstream_response_time $upstream_addr";
+    log_format  access  "$time_iso8601 $request $status  $remote_addr  $upstream_response_time $upstream_addr";
 
     # 访问日志      日志路径     套用的日志格式
     # 缓冲1kb的日志，后续一起写入磁盘
@@ -64,7 +67,8 @@ http {
     send_timeout 10;
 
     client_header_buffer_size 32k;
-    client_max_body_size 20m;
+    # 客户端最大请求大小
+    client_max_body_size 200m;
     large_client_header_buffers 4 32k;
 
     gzip  on;
@@ -181,10 +185,23 @@ http {
         # 定义404页面自动跳转回首页。真实使用时，使用一个提示找不到页面后再跳转
         #error_page   500 502 503 504  /50x.html;
         # 定义404页面由/xueshandai-mobile/规则下的404.html来处理。它会匹配locatin
-        error_page 404 = /xueshandai-mobile/404.html;
-        location = /50x.html {
-            root   html;
-        }
+      error_page 404 = /xueshandai-mobile/404.html;
+
+      location = /50x.html {
+        # 将$remote_addr变量的IP重新设置。一般用于像阿里云SLB后面时，$remote_addr地址会变成阿里的SLB地址
+        # set_real_ip_form 相当于指定阿里SLB的IP地址。
+        set_real_ip_from  192.168.2.0/24;
+        # remote_addr 该变量的来源设置为X-Forwrded-for
+        real_ip_header    X-Forwarded-For;
+        # 递归的去除所配置中的可信IP,如果出现了未出现这些IP段的IP，那么这个IP将被认为是用户的IP
+        real_ip_recursive on;
+        # 如果做访问限制，需要增加一条set_real_ip_from的允许规则。不然全是502
+        allow 192.168.2.0/24;
+        # 再加一条允许的单独IP规则
+        allow 128.22.189.11/32;
+        deny all;
+        root   html;
+      }
   }
 }
 ```
