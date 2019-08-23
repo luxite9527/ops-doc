@@ -11,7 +11,8 @@ xtrabackup --backup --parallel=4 --compress  --compress-threads=4 --user=USERNAM
 因为`xtrabackup`执行的是物理备份，所以恢复时只需要将备份文件复制回去即可:
 
 ```bash
-# 先将压缩文件解压
+# 先将压缩文件解压,解压命令需要qpress支持.xtrabackup源中有该命令
+yum install -y qpress
 xtrabackup  --decompress --target-dir=/data/backup
 # 将解压来的文件还原到MySQL数据目录内。会自动读取/etc/my.cnf文件内的内容，找到MySQL的数据存放目录。还原之前，该目录必须 为空。不然会提示文件不为空的失败信息
 xtrabackup  --copy-back  --target-dir=/data/backup
