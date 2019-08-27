@@ -36,6 +36,7 @@
     * [介绍](ops-tools/ceph/README.md)
     * [简单调试](ops-tools/ceph/ceph-debug.md)
     * [实践-K8S基于Rook部署Ceph](ops-tools/ceph/k8s-install-ceph.md)
+  * Goreplay流量镜像(https://github.com/buger/goreplay)
   * Elasticsearch全文检索
     * [Elasticsearch重要配置项](ops-tools/es/es-conf.md)
     * [Elasticsearch常用API](ops-tools/es/es-api.md)
