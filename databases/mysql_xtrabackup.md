@@ -26,6 +26,13 @@ systemctl start mysqld
 
 单表备份时，必须使用`innobackupex`命令，不能使用`xtrabackup`
 
+单表备份依赖独立表空间，在`MySQL5.7`之后，该值默认开启
+
+```SQL
+SHOW VARIABLES LIKE 'innodb_file_per_table';
+```
+
+
 ```bash
 # 先完整备份一次
 innobackupex --user=backup --password=123456 --include="cumcm.cumcm_sys_country" /home/backup
@@ -49,7 +56,7 @@ cp /home/backup/2019-0o-10_13-17-57/cumcm/cumcm_sys_country.* /var/lib/mysql/cum
 # 启动MySQL
 systemctl start mysqld
 
-# 导入表空间
+# 导入表空间,如果在该步提示导入失败，那在复制备份文件时，只复制ibd文件
 mysql>ALTER TABLE cumcm.cumcm_sys_country IMPORT TABLESPACE;
 
 # 检查, 计数应和备份前的一致
